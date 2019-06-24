@@ -10,7 +10,7 @@ class Madmin extends CI_Model
 		$this->load->library(array('upload','session'));
 	}
 	
-	public function createHotel()
+	public function createIndustri()
 	{
 		$config['upload_path'] = './public/image/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -29,49 +29,49 @@ class Madmin extends CI_Model
 
 		$object = array(
 			'name' => $this->input->post('name'),
-			'price' => $this->input->post('price'),
+			'telp' => $this->input->post('telp'),
 			'latitude' => $this->input->post('latitude'),
 			'longitude' => $this->input->post('longitude'),
 			'address' => $this->input->post('alamat'),
 			'photo' => $photo,
-			'amenities' => @implode(", ", @$this->input->post('amenities')),
+			// 'amenities' => @implode(", ", @$this->input->post('amenities')),
 			'description' => $this->input->post('description')
 		);
 
-		$this->db->insert('hotel', $object);
+		$this->db->insert('industri', $object);
 
-		$IDHotel = $this->db->insert_id();
+		$IDIndustri = $this->db->insert_id();
 
 		if( is_array($this->input->post('categories')) )
 		{
-			$this->db->where('hotel_id', $IDHotel)
-					 ->where_not_in('category_id', $this->input->post('categories'))
-					 ->delete('hotelcategories');
+			$this->db->where('industri_id', $IDIndustri)
+			->where_not_in('category_id', $this->input->post('categories'))
+			->delete('industricategories');
 			foreach ($this->input->post('categories') as $key => $value) 
 			{
-				$this->db->insert('hotelcategories', array(
-					'hotel_id' => $IDHotel,
+				$this->db->insert('industricategories', array(
+					'industri_id' => $IDIndustri,
 					'category_id' => $value
 				));
 			}
 		}
 
-		$this->session->set_flashdata('message', "Data Hotel berhasil ditambahkan");
+		$this->session->set_flashdata('message', "Data Industri berhasil ditambahkan");
 	}
 
-	public function getHotel($param = 0)
+	public function getIndustri($param = 0)
 	{
-		return $this->db->get_where('hotel', array('ID' => $param) )->row();
+		return $this->db->get_where('industri', array('ID' => $param) )->row();
 	}
 
-	public function categoryHotel($hotel = 0, $category = 0)
+	public function categoryIndustri($industri = 0, $category = 0)
 	{
-		return $this->db->get_where('hotelcategories', array('hotel_id' => $hotel, 'category_id' => $category) )->row();
+		return $this->db->get_where('industricategories', array('industri_id' => $industri, 'category_id' => $category) )->row();
 	}
 
-	public function updateHotel($param = 0)
+	public function updateIndustri($param = 0)
 	{
-		$hotel = $this->getHotel($param);
+		$industri = $this->getIndustri($param);
 
 		$config['upload_path'] = './public/image/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -82,7 +82,7 @@ class Madmin extends CI_Model
 
 		if ( ! $this->upload->do_upload('photo'))
 		{
-			$photo = $hotel->photo; 
+			$photo = $industri->photo; 
 			$this->session->set_flashdata('message', $this->upload->display_errors());
 		} else{
 			$photo = $this->upload->file_name;
@@ -90,39 +90,38 @@ class Madmin extends CI_Model
 
 		$object = array(
 			'name' => $this->input->post('name'),
-			'price' => $this->input->post('price'),
+			'telp' => $this->input->post('telp'),
 			'latitude' => $this->input->post('latitude'),
 			'longitude' => $this->input->post('longitude'),
 			'address' => $this->input->post('alamat'),
 			'photo' => $photo,
-			'amenities' => @implode(", ", @$this->input->post('amenities')),
 			'description' => $this->input->post('description')
 		);
 
-		$this->db->update('hotel', $object, array('ID' => $param));
+		$this->db->update('industri', $object, array('ID' => $param));
 
 		if( is_array($this->input->post('categories')) )
 		{
-			$this->db->where('hotel_id', $param)
-					 ->where_not_in('category_id', $this->input->post('categories'))
-					 ->delete('hotelcategories');
+			$this->db->where('industri_id', $param)
+			->where_not_in('category_id', $this->input->post('categories'))
+			->delete('industricategories');
 			foreach ($this->input->post('categories') as $key => $value) 
 			{
-				$this->db->insert('hotelcategories', array(
-					'hotel_id' => $param,
+				$this->db->insert('industricategories', array(
+					'industri_id' => $param,
 					'category_id' => $value
 				));
 			}
 		} else {
-			$this->db->where('hotel_id', $param)
-					 ->where_not_in('category_id', $this->input->post('categories'))
-					 ->delete('hotelcategories');
+			$this->db->where('industri_id', $param)
+			->where_not_in('category_id', $this->input->post('categories'))
+			->delete('industricategories');
 		}
 
 		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
 	}
 
-	public function getAllHotel($limit = 10, $offset = 0, $type = 'result')
+	public function getAllIndustri($limit = 10, $offset = 0, $type = 'result')
 	{
 		if( $this->input->get('q') != '')
 			$this->db->like('name', $this->input->get('q'));
@@ -131,23 +130,23 @@ class Madmin extends CI_Model
 
 		if($type == 'num')
 		{
-			return $this->db->get('hotel')->num_rows();
+			return $this->db->get('industri')->num_rows();
 		} else {
-			return $this->db->get('hotel', $limit, $offset)->result();
+			return $this->db->get('industri', $limit, $offset)->result();
 		}
 	}
 
-	public function deleteHotel($param = 0)
+	public function deleteIndustri($param = 0)
 	{
-		$hotel = $this->getHotel($param);
+		$industri = $this->getIndustri($param);
 
-		if( $hotel->photo != '')
-			@unlink(".pulbic/image/{$hotel->photo}");
+		if( $industri->photo != '')
+			@unlink(".pulbic/image/{$industri->photo}");
 
-		$this->db->delete('hotel', array('ID' => $param));
-		$this->db->delete('hotelcategories', array('hotel_id' => $param));
+		$this->db->delete('industri', array('ID' => $param));
+		$this->db->delete('industricategories', array('industri_id' => $param));
 
-		$this->session->set_flashdata('message', "Data Hotel berhasil dihapus");
+		$this->session->set_flashdata('message', "Data Industri berhasil dihapus");
 	}
 
 	public function setAccount()

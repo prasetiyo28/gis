@@ -1,5 +1,5 @@
 			</div>
-	    </div>
+		</div>
 	</div>
 	<footer class="page-break-top">
 		<div class="footer-divider"></div>
@@ -8,7 +8,7 @@
 				<div class="clearfix page-break-top"></div>
 				<div class="hr5"></div>
 				<div class="col-md-12">
-					<p class="text-center"><small>Hak Cipta <strong>Vicky Saputra</strong> &copy; 2017 <a href="http://vicky.work">[http://vicky.work]</a>. All Right Reserved</small></p>
+					<p class="text-center"><small>GIS Industri Mebel - DIV Teknik Informatika</small></p>
 				</div>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 			var base_url = '<?php echo base_url() ?>';
 			$("#sidebar-sticker").sticky({topSpacing:70});
 			<?php if($this->session->flashdata('message')) : ?>
-			$('div#modal-alert').modal('show');
+				$('div#modal-alert').modal('show');
 			<?php endif; ?>
 
 			$('a.delete-hotel').on('click', function() 

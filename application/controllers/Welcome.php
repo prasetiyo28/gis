@@ -24,8 +24,6 @@ class Welcome extends CI_Controller
 				"definition"=> array(
 					array(
 						"featureType"=>"poi", 
-						"elementType" => 
-						"business", 
 						"stylers"=> array(
 							array(
 								"visibility"=>"off"
@@ -49,6 +47,7 @@ class Welcome extends CI_Controller
 			$marker['infowindow_content'] .= '<h5 class="media-heading">'.$value->name.'</h5>';
 			// $marker['infowindow_content'] .= '<p>Harga : <strong>Rp. '.number_format($value->price).'</strong></p>';
 			$marker['infowindow_content'] .= '<p>'.$value->address.'</p>';
+			$marker['infowindow_content'] .= '<a class="btn btn-info" href='.base_url().'frontend/detail/'.$value->ID.'>Detail</a>';
 			$marker['infowindow_content'] .= '</div>';
 			$marker['infowindow_content'] .= '</div>';
 			$marker['icon'] = base_url("public/icon/map-marker.png");

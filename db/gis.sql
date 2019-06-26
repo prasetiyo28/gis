@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.6
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 24, 2019 at 09:04 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Jun 26, 2019 at 05:51 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -54,9 +54,9 @@ CREATE TABLE `industri` (
   `telp` bigint(20) NOT NULL,
   `latitude` varchar(100) DEFAULT NULL,
   `longitude` varchar(100) DEFAULT NULL,
-  `address` text,
+  `address` text DEFAULT NULL,
   `photo` varchar(250) DEFAULT NULL,
-  `description` text
+  `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -92,6 +92,34 @@ INSERT INTO `industricategories` (`industricategories_id`, `industri_id`, `categ
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id_product` int(11) NOT NULL,
+  `id_industri` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `froms` int(12) NOT NULL,
+  `untils` int(12) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `deleted` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id_product`, `id_industri`, `name`, `froms`, `untils`, `photo`, `description`, `deleted`) VALUES
+(1, 1, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', '', 0),
+(2, 3, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
+(3, 3, 'Kursi Rotan 1', 150000, 250000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
+(4, 3, 'Kursi Rotan 2', 500000, 800000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
+(5, 2, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -100,7 +128,7 @@ CREATE TABLE `users` (
   `fullname` varchar(50) DEFAULT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `password` text
+  `password` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -108,8 +136,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `fullname`, `username`, `email`, `password`) VALUES
-(1, 'Muhammad Vicky Saputra', 'admin', 'mail@vicky.work', '$2y$10$o88Y8KTfkAHgTX5HRstdReV1nBnrBENmxp5FUV6oyAL3tmdSsqviK'),
-(2, 'Kimball Cho', 'kimballcho', 'kimball@cho.id', '$2y$10$gbkLm8MdsHRzue/kIceCIeJHSTFM3ElVmg/GG68yTDJTinEgYHUQa');
+(2, 'Kimball Cho', 'kimballcho', 'kimball@cho.id', '$2y$10$gbkLm8MdsHRzue/kIceCIeJHSTFM3ElVmg/GG68yTDJTinEgYHUQa'),
+(3, 'afidah', 'afidah', 'afidah@gmail.com', '$2y$10$gbkLm8MdsHRzue/kIceCIeJHSTFM3ElVmg/GG68yTDJTinEgYHUQa');
 
 --
 -- Indexes for dumped tables
@@ -132,6 +160,12 @@ ALTER TABLE `industri`
 --
 ALTER TABLE `industricategories`
   ADD PRIMARY KEY (`industricategories_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id_product`);
 
 --
 -- Indexes for table `users`
@@ -162,10 +196,16 @@ ALTER TABLE `industricategories`
   MODIFY `industricategories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

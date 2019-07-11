@@ -39,6 +39,7 @@ class Admin extends CI_Controller
 
 		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telp', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required');
 		$this->form_validation->set_rules('latitude', 'Latitude', 'trim|required');
 		$this->form_validation->set_rules('longitude', 'Longitude', 'trim|required');
 		$this->form_validation->set_rules('description', 'Deskripsi', 'trim|required');

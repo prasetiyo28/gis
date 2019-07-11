@@ -22,21 +22,62 @@ class User extends CI_Controller
 			if ( password_verify($this->input->post('password'), $userLogin->password) ) 
 			{
 				$user_session = array(
-				 	'admin_login' => TRUE,
-				 	'ID' => $userLogin->ID,
-				 	'user' => $userLogin
+					'admin_login' => TRUE,
+					'ID' => $userLogin->ID,
+					'user' => $userLogin
 				);	
 
 				$this->session->set_userdata( $user_session );
 
 				redirect(base_url('admin'));
-			} else {
+			}
+
+			else {
 				$this->session->set_flashdata('message', 'Kombinasi Username/E-Mail dan Password tidak cocok.');
 				redirect(base_url());
 			}
 		} else {
-			$this->session->set_flashdata('message', 'Mohon Masukkan Username/E-Mail dan Password.');
-			redirect(base_url());
+
+			$industri = $this->db->get_where('industri',array('email' => $this->input->post('identity'), 'password'=>md5($this->input->post('password'))))->row();
+
+			if ($industri != '') {
+				$user_session = array(
+
+					'ID' => $industri->ID,
+					'name' => $industri->name,
+					'telp' => $industri->telp,
+					'email' => $industri->email,
+					'password' => $industri->password,
+					'alamat' => $industri->address,
+				);	
+
+				$this->session->set_userdata($user_session);
+				// echo json_encode($industri);
+				redirect('Industri');
+
+			}else{
+				$dinas = $this->db->get_where('dinas',array('email' => $this->input->post('identity'), 'password'=>md5($this->input->post('password'))))->row();
+
+				if ($dinas != '') {
+					$user_session = array(
+
+						'ID' => $industri->ID,
+						'name' => $industri->name,
+						'email' => $industri->email,
+						'password' => $industri->password,
+
+					);	
+
+					$this->session->set_userdata($user_session);
+				// echo json_encode($industri);
+					redirect('Dinas');
+
+				}else{
+
+					$this->session->set_flashdata('message', 'Mohon Masukkan Username/E-Mail dan Password.');
+					redirect(base_url());
+				}
+			}
 		}
 	}
 
@@ -49,6 +90,10 @@ class User extends CI_Controller
 			return $this->db->get_where('users', array('username' => $identity))->row();
 		}
 	}
+
+
+
+
 
 	public function signout()
 	{

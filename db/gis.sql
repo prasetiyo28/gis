@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2019 at 05:51 AM
+-- Generation Time: Jul 11, 2019 at 12:32 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.2.19
 
@@ -45,6 +45,26 @@ INSERT INTO `categories` (`category_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dinas`
+--
+
+CREATE TABLE `dinas` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dinas`
+--
+
+INSERT INTO `dinas` (`ID`, `name`, `email`, `password`) VALUES
+(1, 'Dinas Kabupaten Tegal', 'dinas@gis.com', '25d55ad283aa400af464c76d713c07ad');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `industri`
 --
 
@@ -56,17 +76,21 @@ CREATE TABLE `industri` (
   `longitude` varchar(100) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `photo` varchar(250) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `description` text DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `karyawan` int(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `industri`
 --
 
-INSERT INTO `industri` (`ID`, `name`, `telp`, `latitude`, `longitude`, `address`, `photo`, `description`) VALUES
-(1, 'Toko Mebel H. Muslim Jaya', 1200000, '-6.944447', '109.136154', 'Jl. Raya Banjaran No. 4 Tembok Luwung Adiwerna Kabupaten Tegal Jawa Tengah 52194 Indonesia', '', 'Industri Kecil'),
-(2, 'Toko Mebel Baru Buka', 8564322323, '-6.976991031634734', '109.1221749788208', 'JL MT Haryono No.123', '', 'Menjual Mebel Rotan'),
-(3, 'Toko Mebel Masih Baru', 8454546878, '-6.931153821933284', '109.12500739154052', 'Samping Gule Kepala ikan mas agus', 'undraw_working_remotely_jh40.png', 'mebel karet bekas ban');
+INSERT INTO `industri` (`ID`, `name`, `telp`, `latitude`, `longitude`, `address`, `photo`, `description`, `email`, `password`, `karyawan`) VALUES
+(1, 'Toko Mebel H. Muslim Jaya2', 1200000, '-6.944447', '109.136154', 'Jl. Raya Banjaran No. 4 Tembok Luwung Adiwerna Kabupaten Tegal Jawa Tengah 52194 Indonesia', '', 'Industri Kecil', 'muslim@gmail.com', '25d55ad283aa400af464c76d713c07ad', 12),
+(2, 'Toko Mebel Baru Buka', 8564322323, '-6.976991031634734', '109.1221749788208', 'JL MT Haryono No.123', '', 'Menjual Mebel Rotan', '', '', 0),
+(3, 'Toko Mebel Masih Baru', 8454546878, '-6.931153821933284', '109.12500739154052', 'Samping Gule Kepala ikan mas agus', 'undraw_working_remotely_jh40.png', 'mebel karet bekas ban', '', '', 0),
+(4, 'Toko Mebel A', 8797971212, '-6.933198699741242', '109.13105845507812', 'Jalan Tol no 128', 'google-logo-png-open-20001.png', 'Mebel Baru', 'mebela@gmail.com', '%?Z??@\n?d?mq<?', 90);
 
 -- --------------------------------------------------------
 
@@ -87,7 +111,8 @@ CREATE TABLE `industricategories` (
 INSERT INTO `industricategories` (`industricategories_id`, `industri_id`, `category_id`) VALUES
 (16, 2, 3),
 (17, 3, 2),
-(18, 1, 1);
+(18, 1, 1),
+(19, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -115,7 +140,9 @@ INSERT INTO `product` (`id_product`, `id_industri`, `name`, `froms`, `untils`, `
 (2, 3, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
 (3, 3, 'Kursi Rotan 1', 150000, 250000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
 (4, 3, 'Kursi Rotan 2', 500000, 800000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
-(5, 2, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0);
+(5, 2, 'Kursi Rotan', 250000, 300000, 'kursi1.jpg', ' kursi rotan sintesis berkualitas terbaik no. 1 se-Indonesia sejak 2011. Kursi rotan sintesis bisa di-custom sehingga unik, sesuai kebutuhan & suasana bangunan. Garansi Warna 5 Tahun. Pengalaman bertahun-tahun. ', 0),
+(6, 1, 'Kursi Rotans', 90000, 120000, 'presentation.png', 'Kursi Kuat Kokoh Ringan dan Awet', 0),
+(7, 1, 'Kursi Goyang', 150000, 200000, 'teh.jpg', 'Tahan banting', 0);
 
 -- --------------------------------------------------------
 
@@ -148,6 +175,12 @@ INSERT INTO `users` (`ID`, `fullname`, `username`, `email`, `password`) VALUES
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `dinas`
+--
+ALTER TABLE `dinas`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `industri`
@@ -184,22 +217,28 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `dinas`
+--
+ALTER TABLE `dinas`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `industri`
 --
 ALTER TABLE `industri`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `industricategories`
 --
 ALTER TABLE `industricategories`
-  MODIFY `industricategories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `industricategories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

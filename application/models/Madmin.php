@@ -266,7 +266,7 @@ class Madmin extends CI_Model
 		);
 
 		if( $this->input->post('new_pass') != ''){
-			$object['password'] = md5($this->input->post('new_pass'), PASSWORD_DEFAULT);
+			$object['password'] = md5($this->input->post('new_pass'));
 		}
 		
 		$this->db->update('industri', $object, array('ID' => $user->ID));

@@ -38,7 +38,11 @@ class User extends CI_Controller
 			}
 		} else {
 
-			$industri = $this->db->get_where('industri',array('email' => $this->input->post('identity'), 'password'=>md5($this->input->post('password'))))->row();
+			$industri = $this->db->get_where('industri',array(
+				'email' => $this->input->post('identity'),
+				'password'=>md5($this->input->post('password')),
+				'verifikasi'=>'1'
+			))->row();
 
 			if ($industri != '') {
 				$user_session = array(
@@ -93,6 +97,13 @@ class User extends CI_Controller
 
 
 
+
+	public function Register(){
+		$this->load->model('madmin');
+		$this->madmin->registerIndustri();
+
+		redirect('/');
+	}
 
 
 	public function signout()

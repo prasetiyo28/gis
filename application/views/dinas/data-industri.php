@@ -14,6 +14,7 @@ $this->load->view('headerAdmin', $this->data);
    </div>
  </form>
 </div>
+<h1><a class="btn btn-info" href="<?php echo base_url() ?>dinas/cetak">Cetak Laporan</a></h1>
 <table class="table table-striped">
  <thead>
   <tr>
@@ -35,14 +36,7 @@ $this->load->view('headerAdmin', $this->data);
      <td><?php echo ++$this->page ?>.</td>
      <td class="td-action" width="250">
       <?php echo $row->name ?>
-      <div class="button-action">
-        <?php if ($row->verifikasi == 0){ ?>
-          <a class="verif-industri" href="#" data-id="<?php echo $row->ID; ?>">Verifikasi</a> |
 
-        <?php } ?>
-        <a href="<?php echo base_url('admin/updateindustri/'.$row->ID); ?>">Edit</a> |
-        <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger delete-hotel">Hapus</a>
-      </div>	
     </td>
     <td><?php echo $row->owner ?></td>
     <td width="100"><a href="<?php echo base_url() ?>/public/image/<?php echo $row->ktp ?>" target="_blank"><img width="100%" src="<?php echo base_url() ?>/public/image/<?php echo $row->ktp ?>"></a></td>

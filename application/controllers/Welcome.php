@@ -7,10 +7,15 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library(array('googlemaps','session'));
+		$this->load->helper(array('menus','text','url'));
 	}
 
 	public function pass_yuk (){
 		echo password_hash("admin",PASSWORD_DEFAULT);
+	}
+
+	public function register(){
+		$this->load->view('frontend/register');
 	}
 
 	public function index()
@@ -57,6 +62,20 @@ class Welcome extends CI_Controller
 		$this->googlemaps->initialize($config);
 
 		$this->data['map'] = $this->googlemaps->create_map();
+
+		$config['map_div_id'] = "map-add";
+		$config['map_width'] = "400px";
+		$config['center'] = '-6.880029,109.124192';
+		$config['zoom'] = '12';
+		$config['map_height'] = '400px;';
+		$this->googlemaps->initialize($config);
+
+		$marker2 = array();
+		$marker2['position'] = '-6.880029,109.124192';
+		$marker2['draggable'] = true;
+		$marker2['ondragend'] = 'setMapToForm(event.latLng.lat(), event.latLng.lng());';
+		$this->googlemaps->add_marker($marker2);
+		$this->data['peta'] = $this->googlemaps->create_map();
 
 		$this->load->view('main-index', $this->data);
 	}

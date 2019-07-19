@@ -17,8 +17,7 @@ class Admin extends CI_Controller
 		if($this->session->has_userdata('admin_login')==FALSE) 
 			redirect(site_url());
 
-		$this->amenities = array('Wifi','AC','TV kabel','Telepon','Shower Panas & Dingin','Smooking Area');
-
+		
 		$this->load->model('madmin');
 
 		$this->page = $this->input->get('page');
@@ -149,6 +148,13 @@ class Admin extends CI_Controller
 	public function deleteindustri($param = 0)
 	{
 		$this->madmin->deleteIndustri($param);
+
+		redirect('admin/industri');
+	}
+
+	public function verifiindustri($param = 0)
+	{
+		$this->madmin->verifIndustri($param);
 
 		redirect('admin/industri');
 	}

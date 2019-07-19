@@ -61,6 +61,67 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Data Industri berhasil ditambahkan");
 	}
 
+	public function registerIndustri()
+	{
+		$config['upload_path'] = './public/image/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo'))
+		{
+			$photo = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo = $this->upload->file_name;
+		}
+		if ( ! $this->upload->do_upload('ktp'))
+		{
+			$ktp = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$ktp = $this->upload->file_name;
+		}
+
+		$object = array(
+			'name' => $this->input->post('name'),
+			'owner' => $this->input->post('owner'),
+			'telp' => $this->input->post('telp'),
+			'latitude' => $this->input->post('latitude'),
+			'longitude' => $this->input->post('longitude'),
+			'address' => $this->input->post('alamat'),
+			'photo' => $photo,
+			'ktp' => $ktp,
+			// 'amenities' => @implode(", ", @$this->input->post('amenities')),
+			'description' => $this->input->post('description'),
+			'email' => $this->input->post('email'),
+			'password' => md5($this->input->post('alamat')),
+			'verifikasi' => '0'
+
+		);
+
+		$this->db->insert('industri', $object);
+
+		$IDIndustri = $this->db->insert_id();
+
+		if( is_array($this->input->post('categories')) )
+		{
+			$this->db->where('industri_id', $IDIndustri)
+			->where_not_in('category_id', $this->input->post('categories'))
+			->delete('industricategories');
+			foreach ($this->input->post('categories') as $key => $value) 
+			{
+				$this->db->insert('industricategories', array(
+					'industri_id' => $IDIndustri,
+					'category_id' => $value
+				));
+			}
+		}
+
+		$this->session->set_flashdata('message', "Data Industri berhasil ditambahkan , silahkan tunggu verifikasi dari admin");
+	}
 	public function createProduk()
 	{
 		$config['upload_path'] = './public/image/';
@@ -207,6 +268,16 @@ class Madmin extends CI_Model
 		}
 	}
 
+	public function getAllIndustri_laporan()
+	{
+		$this->db->select('industri.*,categories.name as kategori');
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		$this->db->join('categories','categories.category_id = industricategories.category_id');
+		$query = $this->db->get('industri');
+
+		return $query->result();
+	}
+
 	public function getAllProduk($limit = 10, $offset = 0, $type = 'result')
 	{
 		if( $this->input->get('q') != '')
@@ -235,6 +306,14 @@ class Madmin extends CI_Model
 		$this->db->delete('industricategories', array('industri_id' => $param));
 
 		$this->session->set_flashdata('message', "Data Industri berhasil dihapus");
+	}
+
+	public function verifIndustri($param = 0)
+	{	
+		$this->db->where('industri.ID',$param);
+		$this->db->set('industri.verifikasi','1');
+		$this->db->update('industri');
+		$this->session->set_flashdata('message', "Data Industri berhasil diverifikasi");
 	}
 
 	public function setAccount()

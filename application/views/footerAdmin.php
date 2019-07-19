@@ -41,6 +41,22 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal" id="modal-verif">
+		<div class="modal-dialog modal-sm modal-danger">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"><i class="fa fa-info-circle"></i> Verifikasi</h4>
+					<span>Verifikasi Industri ini?</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+					<a href="#" id="btn-yes" class="btn btn-success">verifikasi</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script>
 		function detail_hotel(param) 
 		{
@@ -63,7 +79,16 @@
 				var ID = $(this).data('id');
 
 				$('#modal-delete').modal('show');
-				$('a#btn-yes').attr('href', base_url + 'admin/deletehotel/' + ID);
+				$('a#btn-yes').attr('href', base_url + 'admin/deleteindustri/' + ID);
+			});
+
+
+			$('a.verif-industri').on('click', function() 
+			{
+				var ID = $(this).data('id');
+
+				$('#modal-verif').modal('show');
+				$('a#btn-yes').attr('href', base_url + 'admin/verifiindustri/' + ID);
 			});
 		});
 	</script>

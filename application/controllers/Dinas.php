@@ -91,6 +91,53 @@ class Dinas extends CI_Controller {
 		// echo json_encode($config);
 	}
 
+	public function industri()
+	{
+		$config['base_url'] = site_url("Dinas/industri?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getAllIndustri(null, null, 'num');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+		$this->data = array(
+			'title' => "Data Industri",
+			'industri' => $this->madmin->getAllIndustri($config['per_page'], $this->input->get('page'), 'result')
+		);
+
+		$this->load->view('dinas/data-industri', $this->data);
+		// echo json_encode($this->data);
+		// echo json_encode($config);
+	}
+
+	public function cetak()
+	{
+		$data['industri'] = $this->madmin->getAllIndustri_laporan();
+		$this->load->view('dinas/cetaklaporan',$data);
+		
+	}
+
 	public function updateproduk($param = 0)
 	{
 		$this->data['title'] = "Update Produk";

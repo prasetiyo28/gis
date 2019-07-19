@@ -49,7 +49,7 @@
 						<a href="<?php echo base_url('Dinas') ?>" class="list-group-item <?php echo active_link_method('index', 'Dinas') ?>">
 							<i class="fa fa-home"></i> Home
 						</a>
-						<a href="<?php echo base_url('Dinas/produk') ?>" class="list-group-item <?php echo active_link_method('produk', 'Dinas') ?>">
+						<a href="<?php echo base_url('Dinas/industri') ?>" class="list-group-item <?php echo active_link_method('industri', 'Dinas') ?>">
 							<i class="fa fa-industry"></i> Data Industri
 						</a>
 						<a href="<?php echo base_url('Dinas/account') ?>" class="list-group-item <?php echo active_link_method('account', 'Dinas') ?>">

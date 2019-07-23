@@ -52,8 +52,16 @@
 						<a href="<?php echo base_url('admin/addindustri') ?>" class="list-group-item <?php echo active_link_method('addindustri', 'admin') ?>">
 							<i class="fa fa-plus"></i> Tambah Industri
 						</a>
+
 						<a href="<?php echo base_url('admin/industri') ?>" class="list-group-item <?php echo active_link_method('industri', 'admin') ?>">
 							<i class="fa fa-industry"></i> Data Industri
+						</a>
+						<a href="<?php echo base_url('admin/artikel') ?>" class="list-group-item <?php echo active_link_method('artikel', 'admin') ?>">
+							<i class="fa fa-list"></i> Artikel
+						</a>
+
+						<a href="<?php echo base_url('admin/bantuan') ?>" class="list-group-item <?php echo active_link_method('bantuan', 'admin') ?>">
+							<i class="fa fa-question"></i> Bantuan
 						</a>
 						<a href="<?php echo base_url('admin/account') ?>" class="list-group-item <?php echo active_link_method('account', 'admin') ?>">
 							<i class="fa fa-wrench"></i> Pengaturan Akun

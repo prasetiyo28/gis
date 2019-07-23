@@ -68,6 +68,41 @@ class Admin extends CI_Controller
 		$this->load->view('add-industri', $this->data);
 	}
 
+	public function addArtikel()
+	{	
+		$this->data['title'] = "Tambah Artikel";
+
+		$this->form_validation->set_rules('title', 'Judul', 'trim|required');
+		$this->form_validation->set_rules('content', 'Konten', 'trim|required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createArtikel();
+
+			redirect(current_url());
+		}
+
+
+		$this->load->view('add-artikel', $this->data);
+	}
+
+	public function addBantuan()
+	{	
+		$this->data['title'] = "Tambah Bantuan";
+
+		$this->form_validation->set_rules('question', 'Pertanyaan', 'trim|required');
+		$this->form_validation->set_rules('answer', 'Jawaban', 'trim|required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createBantuan();
+
+			redirect(current_url());
+		}
+
+
+		$this->load->view('add-bantuan', $this->data);
+	}
 	public function industri()
 	{
 		$config['base_url'] = site_url("admin/industri?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
@@ -104,6 +139,86 @@ class Admin extends CI_Controller
 		);
 
 		$this->load->view('data-industri', $this->data);
+		// echo json_encode($this->data);
+		// echo json_encode($config);
+	}
+
+	public function artikel()
+	{
+		$config['base_url'] = site_url("admin/artikel?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getAllArtikel(null, null, 'num');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+		$this->data = array(
+			'title' => "Data Industri",
+			'artikel' => $this->madmin->getAllArtikel($config['per_page'], $this->input->get('page'), 'result')
+		);
+
+		$this->load->view('data-artikel', $this->data);
+		// echo json_encode($this->data);
+		// echo json_encode($config);
+	}
+
+	public function bantuan()
+	{
+		$config['base_url'] = site_url("admin/bantuan?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getAllBantuan(null, null, 'num');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+		$this->data = array(
+			'title' => "Data Industri",
+			'bantuan' => $this->madmin->getAllBantuan($config['per_page'], $this->input->get('page'), 'result')
+		);
+
+		$this->load->view('data-bantuan', $this->data);
 		// echo json_encode($this->data);
 		// echo json_encode($config);
 	}
@@ -145,11 +260,63 @@ class Admin extends CI_Controller
 		$this->load->view('update-industri', $this->data);
 	}
 
+	public function updateArtikel($param = 0)
+	{
+		$this->data['title'] = "Update Artikel";
+
+		$this->form_validation->set_rules('title', 'Judul', 'trim|required');
+		$this->form_validation->set_rules('content', 'Konten', 'trim|required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->updateArtikel($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['artikel'] = $this->madmin->getArtikel($param);
+
+		$this->load->view('update-artikel', $this->data);
+	}
+
+	public function updateBantuan($param = 0)
+	{
+		$this->data['title'] = "Update Bantuan";
+
+		$this->form_validation->set_rules('answer', 'Jawaban', 'trim|required');
+		$this->form_validation->set_rules('question', 'Pertanyaan', 'trim|required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->updateBantuan($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['bantuan'] = $this->madmin->getBantuan($param);
+
+		$this->load->view('update-bantuan', $this->data);
+	}
+
 	public function deleteindustri($param = 0)
 	{
 		$this->madmin->deleteIndustri($param);
 
 		redirect('admin/industri');
+	}
+
+	public function deleteartikel($param = 0)
+	{
+		$this->madmin->deleteartikel($param);
+
+		redirect('admin/artikel');
+	}
+
+	public function deletebantuan($param = 0)
+	{
+		$this->madmin->deletebantuan($param);
+
+		redirect('admin/bantuan');
 	}
 
 	public function verifiindustri($param = 0)

@@ -82,6 +82,22 @@
 				$('a#btn-yes').attr('href', base_url + 'admin/deleteindustri/' + ID);
 			});
 
+			$('a.delete-artikel').on('click', function() 
+			{
+				var ID = $(this).data('id');
+
+				$('#modal-delete').modal('show');
+				$('a#btn-yes').attr('href', base_url + 'admin/deleteArtikel/' + ID);
+			});
+
+			$('a.delete-bantuan').on('click', function() 
+			{
+				var ID = $(this).data('id');
+
+				$('#modal-delete').modal('show');
+				$('a#btn-yes').attr('href', base_url + 'admin/deletebantuan/' + ID);
+			});
+
 
 			$('a.verif-industri').on('click', function() 
 			{

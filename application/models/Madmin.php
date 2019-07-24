@@ -61,6 +61,8 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Data Industri berhasil ditambahkan");
 	}
 
+
+
 	public function createArtikel()
 	{
 		$config['upload_path'] = './public/image/';
@@ -137,7 +139,7 @@ class Madmin extends CI_Model
 			// 'amenities' => @implode(", ", @$this->input->post('amenities')),
 			'description' => $this->input->post('description'),
 			'email' => $this->input->post('email'),
-			'password' => md5($this->input->post('alamat')),
+			'password' => md5($this->input->post('password')),
 			'verifikasi' => '0'
 
 		);

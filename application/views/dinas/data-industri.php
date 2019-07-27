@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$this->load->view('headerAdmin', $this->data);
+$this->load->view('dinas/header', $this->data);
 ?>
 <div class="page-header">
 	<h1>Data Industri</h1>

@@ -38,7 +38,16 @@
 	<div style="float: right; margin-right: 100px" >
 
 		<p>Tegal , 28 July 2019</p><br><br><br>
-		<p>DISPERINDAG</p>
+		<p>DISPERINDAG 
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<?php echo $dinas->name; ?>
+		</p>
+
 	</div>
 </body>
 </html>

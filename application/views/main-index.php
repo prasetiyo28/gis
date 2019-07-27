@@ -46,7 +46,9 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<?php echo base_url() ?>" class="hvr-underline-reveal">Home</a></li>
-						<li><a href="<?php echo base_url() ?>" class="hvr-underline-reveal">Grafik</a></li>
+						<li><a href="<?php echo base_url() ?>Frontend/grafik" class="hvr-underline-reveal">Grafik</a></li>
+						<li><a href="<?php echo base_url() ?>Frontend/berita" class="hvr-underline-reveal">Berita</a></li>
+						<li><a href="<?php echo base_url() ?>Frontend/bantuan" class="hvr-underline-reveal">Bantuan</a></li>
 
 					</ul>
 				</div>
@@ -82,7 +84,7 @@
 		    	</select> -->
 		    </div>
 		    <div class="form-group">
-		    	<button class="btn btn-primary btn-block"><i class="fa fa-search"></i> Cari Lokasi Meubel</button>
+		    	<button class="btn btn-warning btn-block"><i class="fa fa-search"></i> Cari Lokasi Meubel</button>
 		    </div>
 		    <div id="directionsDiv"></div>
 		</form>

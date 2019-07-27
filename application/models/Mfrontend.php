@@ -9,6 +9,15 @@ class Mfrontend extends CI_Model
 		return $this->db->get_where('industri', array('ID' => $param) )->row();
 	}
 
+	public function getArtikel($param = 0)
+	{
+		return $this->db->get('artikel')->result();
+	}
+	public function getBantuan($param = 0)
+	{
+		return $this->db->get('bantuan')->result();
+	}
+
 	public function getProductIndustri($param = 0)
 	{
 		return $this->db->get_where('product', array('id_industri' => $param) )->result();

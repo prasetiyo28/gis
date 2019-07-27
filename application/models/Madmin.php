@@ -483,6 +483,23 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Perubahan berhasil disimpan.");
 	}
 
+	public function setAccountDinas()
+	{
+		$user = $this->getAccount();
+
+		$object = array(
+			'name' => $this->input->post('name'),
+			'email' => $this->input->post('email')
+		);
+
+		if( $this->input->post('new_pass') != '')
+			$object['password'] = password_hash($this->input->post('new_pass'), PASSWORD_DEFAULT);
+
+		$this->db->update('dinas', $object);
+
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan.");
+	}
+
 	public function setAccountIndustri()
 	{
 		$user = $this->getAccountIndustri();
@@ -505,6 +522,11 @@ class Madmin extends CI_Model
 	public function getAccount()
 	{
 		return $this->db->get_where('users', array('ID' => $this->session->userdata('user')->ID) )->row();
+	}
+
+	public function getaccountDinas()
+	{
+		return $this->db->get('dinas')->row();
 	}
 
 	public function getAccountIndustri()

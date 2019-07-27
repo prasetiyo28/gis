@@ -133,6 +133,7 @@ class Dinas extends CI_Controller {
 
 	public function cetak()
 	{
+		$data['dinas'] = $this->madmin->getAccountdinas();
 		$data['industri'] = $this->madmin->getAllIndustri_laporan();
 		$this->load->view('dinas/cetaklaporan',$data);
 		
@@ -161,7 +162,7 @@ class Dinas extends CI_Controller {
 	{
 		$this->data = array(
 			'title' => "Pengaturan Akun",
-			'user' => $this->madmin->getAccountdinas($this->session->userdata('ID'))
+			'user' => $this->madmin->getAccountdinas()
 		);	
 		$this->form_validation->set_rules('name', 'Nama Lengkap', 'trim|required');
 		$this->form_validation->set_rules('email', 'E-Mail', 'trim|valid_email|required');

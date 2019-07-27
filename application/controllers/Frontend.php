@@ -16,6 +16,27 @@ class Frontend extends CI_Controller
 
 	}
 
+	public function berita()
+	{
+		$data['artikel'] = $this->Mfrontend->getArtikel();
+		$this->load->view('frontend/berita',$data);
+
+	}
+
+	public function bantuan()
+	{
+		$data['bantuan'] = $this->Mfrontend->getBantuan();
+		$this->load->view('frontend/bantuan',$data);
+
+	}
+
+	public function grafik()
+	{
+		$data['bantuan'] = $this->Mfrontend->getBantuan();
+		$this->load->view('frontend/grafik',$data);
+
+	}
+
 	public function detail($id){
 		$data['industri'] = $this->Mfrontend->getIndustri($id);
 		$data['product'] = $this->Mfrontend->getProductIndustri($id);

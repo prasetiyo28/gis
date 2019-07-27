@@ -157,7 +157,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				labels: ["Industri Custom","Industri Non Custom"],
 				datasets: [{
 					label: '# of Votes',
-					data: [12, 19],
+					data: [<?php echo $a ?>, <?php echo $b ?>],
 					backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',

@@ -32,6 +32,8 @@ class Frontend extends CI_Controller
 
 	public function grafik()
 	{
+		$data['a'] = $this->Mfrontend->getHitung('1');
+		$data['b'] = $this->Mfrontend->getHitung('2');	
 		$data['bantuan'] = $this->Mfrontend->getBantuan();
 		$this->load->view('frontend/grafik',$data);
 

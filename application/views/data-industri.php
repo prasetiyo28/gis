@@ -41,7 +41,8 @@ $this->load->view('headerAdmin', $this->data);
 
         <?php } ?>
         <a href="<?php echo base_url('admin/updateindustri/'.$row->ID); ?>">Edit</a> |
-        <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger delete-hotel">Hapus</a>
+        <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger delete-hotel">Hapus</a> |
+        <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger reset-industri">Reset</a>
       </div>	
     </td>
     <td><?php echo $row->owner ?></td>

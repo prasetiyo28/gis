@@ -29,7 +29,7 @@ class User extends CI_Controller
 
 				$this->session->set_userdata( $user_session );
 
-				redirect(base_url('admin'));
+				redirect(base_url('Admin'));
 			}
 
 			else {
@@ -64,11 +64,10 @@ class User extends CI_Controller
 
 				if ($dinas != '') {
 					$user_session = array(
-
-						'ID' => $industri->ID,
-						'name' => $industri->name,
-						'email' => $industri->email,
-						'password' => $industri->password,
+						'ID' => $dinas->ID,
+						'name' => $dinas->name,
+						'email' => $dinas->email,
+						'password' => $dinas->password,
 
 					);	
 

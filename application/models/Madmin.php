@@ -438,6 +438,15 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Data Industri berhasil dihapus");
 	}
 
+	public function reset_password($param = 0)
+	{	
+
+		$this->db->where('ID', $param);
+		$this->db->set('password', md5('industri12345'));
+		$this->db->update('industri');
+		$this->session->set_flashdata('message', "Data Industri berhasil direset password");
+	}
+
 	public function deleteArtikel($param = 0)
 	{
 		$artikel = $this->getArtikel($param);
@@ -507,6 +516,7 @@ class Madmin extends CI_Model
 		$object = array(
 			'name' => $this->input->post('name'),
 			'karyawan' => $this->input->post('karyawan'),
+			'pendapatan' => $this->input->post('pendapatan'),
 			'email' => $this->input->post('email')
 		);
 

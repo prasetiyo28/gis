@@ -23,9 +23,18 @@ class Mfrontend extends CI_Model
 		return $this->db->get_where('product', array('id_industri' => $param) )->result();
 	}
 
-	public function getHitung($param = 0)
+	public function getHitung($param)
 	{
-		return $this->db->get_where('industricategories', array('category_id' => $param) )->num_rows();
+		$this->db->where('industricategories.category_id',$param);
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		return $this->db->get('industri')->num_rows();
+	}
+
+	public function reset_pass($email,$data)
+	{
+		$this->db->set($data);
+		$this->db->where('email',$email);
+		$this->db->update('industri');
 	}
 
 }

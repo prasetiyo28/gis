@@ -14,6 +14,7 @@
 				<th>Alamat</th>
 				<!-- <th>Izin Usaha</th> -->
 				<th>Jumlah Karyawan</th>
+				<th>Pendapatan /bln</th>
 				<!-- <th>Gaji Karyawan</th> -->
 				<!-- <th>Penghasilan/pendapatan per bulan</th> -->
 				<th>Kategori</th>
@@ -26,6 +27,7 @@
 					<td><?php echo $i->owner ?></td>
 					<td><?php echo $i->address ?></td>
 					<td><?php echo $i->karyawan ?></td>
+					<td><?php echo $i->pendapatan ?></td>
 					<td><?php echo $i->kategori ?></td>
 				</tr>
 

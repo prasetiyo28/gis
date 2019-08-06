@@ -305,6 +305,13 @@ class Admin extends CI_Controller
 		redirect('admin/industri');
 	}
 
+	public function reset_password($id)
+	{
+		$this->madmin->reset_password($id);
+
+		redirect('admin/industri');
+	}
+
 	public function deleteartikel($param = 0)
 	{
 		$this->madmin->deleteartikel($param);

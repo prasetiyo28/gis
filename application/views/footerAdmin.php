@@ -42,6 +42,22 @@
 		</div>
 	</div>
 
+	<div class="modal" id="modal-reset">
+		<div class="modal-dialog modal-sm modal-danger">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"><i class="fa fa-info-circle"></i> Reset Password!</h4>
+					<span>Apakah anda yakin untu reset password?</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+					<a href="#" id="btn-yes" class="btn btn-danger">reset</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal" id="modal-verif">
 		<div class="modal-dialog modal-sm modal-danger">
 			<div class="modal-content">
@@ -80,6 +96,14 @@
 
 				$('#modal-delete').modal('show');
 				$('a#btn-yes').attr('href', base_url + 'admin/deleteindustri/' + ID);
+			});
+
+			$('a.reset-industri').on('click', function() 
+			{
+				var ID = $(this).data('id');
+
+				$('#modal-reset').modal('show');
+				$('a#btn-yes').attr('href', base_url + 'admin/reset_password/' + ID);
 			});
 
 			$('a.delete-artikel').on('click', function() 

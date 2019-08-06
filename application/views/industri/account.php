@@ -45,6 +45,16 @@ $this->load->view('industri/header', $this->data);
 </div>
 
 <div class="form-group">
+  <label class="col-sm-2 control-label">Pendapatan per Bulan :</label>
+  <div class="col-sm-4">
+    <input type="number" name="pendapatan" class="form-control" value="<?php echo $user->pendapatan ?>" placeholder="Rp....">
+
+    <p class="help-block"><?php  echo form_error('pendapatan', '<small class="text-red">', '</small>'); ?></p>
+  </div>
+
+</div>
+
+<div class="form-group">
  <label class="col-sm-2 control-label">Password Baru :</label>
  <div class="col-sm-8">
   <input type="password" name="new_pass" class="form-control" value="<?php echo set_value('new_pass') ?>" placeholder="">

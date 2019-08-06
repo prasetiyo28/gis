@@ -26,6 +26,13 @@ class Madmin extends CI_Model
 		} else{
 			$photo = $this->upload->file_name;
 		}
+		if ( ! $this->upload->do_upload('ktp'))
+		{
+			$ktp = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$ktp = $this->upload->file_name;
+		}
 
 		$object = array(
 			'name' => $this->input->post('name'),
@@ -34,6 +41,8 @@ class Madmin extends CI_Model
 			'longitude' => $this->input->post('longitude'),
 			'address' => $this->input->post('alamat'),
 			'photo' => $photo,
+			'ktp' => $ktp,
+			'owner' => $this->input->post('owner'),
 			// 'amenities' => @implode(", ", @$this->input->post('amenities')),
 			'description' => $this->input->post('description'),
 			'email' => $this->input->post('email'),

@@ -84,7 +84,7 @@ class Welcome extends CI_Controller
 	{
 		$this->db->select('industri.*, categories.name as category');
 
-		$this->db->join('industricategories', 'industri.ID = industricategories.category_id', 'left');
+		$this->db->join('industricategories', 'industri.ID = industricategories.industri_id', 'left');
 
 		$this->db->join('categories', 'industricategories.category_id = categories.category_id', 'left');
 

@@ -343,7 +343,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('name', 'Nama Lengkap', 'trim|required');
 		$this->form_validation->set_rules('email', 'E-Mail', 'trim|valid_email|required');
 		$this->form_validation->set_rules('new_pass', 'Password Baru', 'trim|min_length[6]|max_length[12]');
-		$this->form_validation->set_rules('old_pass', 'Password Lama', 'trim|required|callback_validate_password');
+		// $this->form_validation->set_rules('old_pass', 'Password Lama', 'trim|callback_validate_password');
 		if ($this->form_validation->run() == TRUE) 
 		{
 			$this->madmin->setAccount();

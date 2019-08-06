@@ -33,8 +33,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div> 
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li ><a href="#" class="hyper "><span>Home</span></a></li>			
-							<li><a href="<?php echo base_url() ?>" class="hyper"> <span>Kembali Ke Maps</span></a></li>
+
+							<li><a href="<?php echo base_url() ?>" class="hyper"> <span>Beranda</span></a></li>
 							<!-- <li><a href="contact.html" class="hyper"><span>Contact Us</span></a></li> -->
 						</ul>
 					</div>
@@ -84,95 +84,97 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     			<div class="col-md-7 contact-left">
     				<h4><?php echo $industri->name ?></h4>
     				<ul class="contact-list">
-    					<li> <i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $industri->address ?></li><br>  						<li> <i class="fa fa-phone" aria-hidden="true"></i><?php echo $industri->telp; ?></li>
-    				</ul>
-    			</div>
+    					<li> <i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $industri->address ?></li><br>  						<li> <i class="fa fa-phone" aria-hidden="true"></i><?php echo $industri->telp; ?></li><br><br><br>
+                        <li><?php echo $industri->description ?></li>
+                    </ul>
 
-    			<!--Plug-in Initialisation-->
-    		</div>
+                </div>
 
-    	</div>
+                <!--Plug-in Initialisation-->
+            </div>
+
+        </div>
 
 
 
 
-    	<!--content-->
-    	<div class="product">
-    		<div class="container">
-    			<div class="spec ">
-    				<h3>Products</h3>
-    				<div class="ser-t">
-    					<b></b>
-    					<span><i></i></span>
-    					<b class="line"></b>
-    				</div>
-    			</div>
-    			<div class=" con-w3l agileinf">
-    				<?php foreach ($product as $row) {?>
-    					<div class="col-md-3 pro-1">
-    						<div class="col-m">
-    							<a href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_product?>" class="offer-img">
-    								<img src="<?php echo base_url() ?>public/image/<?php echo $row->photo ?>" class="img-responsive" alt="">
-    							</a>
-    							<div class="mid-1">
-    								<div class="women">
-    									<h6><a href="single.html"><?php echo $row->name ?></a></h6>							
-    								</div>
-    								<div class="mid-2">
-    									<p ><em class="item_price">Rp. <?php echo $row->froms ?> - Rp. <?php echo $row->untils; ?></em></p>
-    									
-    									<div class="clearfix"></div>
-    								</div>
-    								<div class="add">
-    									<a class="btn btn-danger my-cart-btn my-cart-b" href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_product?>">Detail</a>
-    								</div>
+        <!--content-->
+        <div class="product">
+          <div class="container">
+             <div class="spec ">
+                <h3>Products</h3>
+                <div class="ser-t">
+                   <b></b>
+                   <span><i></i></span>
+                   <b class="line"></b>
+               </div>
+           </div>
+           <div class=" con-w3l agileinf">
+            <?php foreach ($product as $row) {?>
+               <div class="col-md-3 pro-1">
+                  <div class="col-m">
+                     <a href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_product?>" class="offer-img">
+                        <img src="<?php echo base_url() ?>public/image/<?php echo $row->photo ?>" class="img-responsive" alt="">
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                           <h6><a href="single.html"><?php echo $row->name ?></a></h6>							
+                       </div>
+                       <div class="mid-2">
+                           <p ><em class="item_price">Rp. <?php echo $row->froms ?> - Rp. <?php echo $row->untils; ?></em></p>
 
-    								
-    							</div>
-    						</div>
-    					</div>
+                           <div class="clearfix"></div>
+                       </div>
+                       <div class="add">
+                           <a class="btn btn-danger my-cart-btn my-cart-b" href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_product?>">Detail</a>
+                       </div>
 
-    					<!-- product -->
-    					<div class="modal fade" id="myModal<?php echo$row->id_product?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    						<div class="modal-dialog" role="document">
-    							<div class="modal-content modal-info">
-    								<div class="modal-header">
-    									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-    								</div>
-    								<div class="modal-body modal-spa">
-    									<div class="col-md-5 span-2">
-    										<div class="item">
-    											<img src="<?php echo base_url() ?>public/image/<?php echo $row->photo ?>" class="img-responsive" alt="">
-    										</div>
-    									</div>
-    									<div class="col-md-7 span-1 ">
-    										<h3><?php echo $row->name ?></h3>
-    										<div class="price_single">
-    											<span class="reducedfrom ">Rp. <?php echo $row->froms ?> - Rp. <?php echo $row->untils ?></span>
 
-    											<div class="clearfix"></div>
-    										</div>
-    										<h4 class="quick">Deskripsi:</h4>
-    										<p class="quick_desc"><?php echo $row->description ?></p>
+                   </div>
+               </div>
+           </div>
 
-    										
-    									</div>
-    									<div class="clearfix"> </div>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    				<?php } ?>
-    				<div class="clearfix"></div>
-    			</div>
-    		</div>
-    	</div>
-    	<!--footer-->
-        <?php include 'footer.php'; ?>    	
+           <!-- product -->
+           <div class="modal fade" id="myModal<?php echo$row->id_product?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                 <div class="modal-content modal-info">
+                    <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+                   </div>
+                   <div class="modal-body modal-spa">
+                       <div class="col-md-5 span-2">
+                          <div class="item">
+                             <img src="<?php echo base_url() ?>public/image/<?php echo $row->photo ?>" class="img-responsive" alt="">
+                         </div>
+                     </div>
+                     <div class="col-md-7 span-1 ">
+                      <h3><?php echo $row->name ?></h3>
+                      <div class="price_single">
+                         <span class="reducedfrom ">Rp. <?php echo $row->froms ?> - Rp. <?php echo $row->untils ?></span>
 
-        <!-- smooth scrolling -->
-        <script type="text/javascript">
-          $(document).ready(function() {
+                         <div class="clearfix"></div>
+                     </div>
+                     <h4 class="quick">Deskripsi:</h4>
+                     <p class="quick_desc"><?php echo $row->description ?></p>
+
+
+                 </div>
+                 <div class="clearfix"> </div>
+             </div>
+         </div>
+     </div>
+ </div>
+<?php } ?>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+<!--footer-->
+<?php include 'footer.php'; ?>    	
+
+<!-- smooth scrolling -->
+<script type="text/javascript">
+  $(document).ready(function() {
 		/*
 			var defaults = {
 			containerID: 'toTop', // fading element id

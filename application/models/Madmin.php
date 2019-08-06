@@ -503,7 +503,7 @@ class Madmin extends CI_Model
 
 	public function setAccountDinas()
 	{
-		$user = $this->getAccount();
+		$user = $this->getAccountDinas();
 
 		$object = array(
 			'name' => $this->input->post('name'),
@@ -511,7 +511,7 @@ class Madmin extends CI_Model
 		);
 
 		if( $this->input->post('new_pass') != '')
-			$object['password'] = password_hash($this->input->post('new_pass'), PASSWORD_DEFAULT);
+			$object['password'] = md5($this->input->post('new_pass'));
 
 		$this->db->update('dinas', $object);
 

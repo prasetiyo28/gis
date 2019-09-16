@@ -136,6 +136,20 @@ class Madmin extends CI_Model
 			$ktp = $this->upload->file_name;
 		}
 
+		if ( ! $this->upload->do_upload('ktp'))
+		{
+			$siup = "Belum Ada"; 
+			// $this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$siup = $this->upload->file_name;
+		}
+
+		$cek_email = $this->cek_email($this->input->post('email'));
+		if ($cek_email > 0 ) {
+			$this->session->set_flashdata('message', 'Email Sudah Digunakan');
+			redirect('Login/register');
+		}
+
 		$object = array(
 			'name' => $this->input->post('name'),
 			'owner' => $this->input->post('owner'),
@@ -145,6 +159,7 @@ class Madmin extends CI_Model
 			'address' => $this->input->post('alamat'),
 			'photo' => $photo,
 			'ktp' => $ktp,
+			'siup' => $siup,
 			// 'amenities' => @implode(", ", @$this->input->post('amenities')),
 			'description' => $this->input->post('description'),
 			'email' => $this->input->post('email'),
@@ -173,6 +188,14 @@ class Madmin extends CI_Model
 
 		$this->session->set_flashdata('message', "Data Industri berhasil ditambahkan , silahkan tunggu verifikasi dari admin");
 	}
+
+	public function cek_email($email){
+		$this->db->where('email',$email);
+		$query = $this->db->get('industri');
+		
+		return $query->num_rows();
+	}
+
 	public function createProduk()
 	{
 		$config['upload_path'] = './public/image/';
@@ -368,6 +391,7 @@ class Madmin extends CI_Model
 			$this->db->like('name', $this->input->get('q'));
 
 		$this->db->order_by('ID', 'desc');
+		$this->db->group_by('ID');
 
 		if($type == 'num')
 		{
@@ -410,6 +434,17 @@ class Madmin extends CI_Model
 	public function getAllIndustri_laporan()
 	{
 		$this->db->select('industri.*,categories.name as kategori');
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		$this->db->join('categories','categories.category_id = industricategories.category_id');
+		$query = $this->db->get('industri');
+
+		return $query->result();
+	}
+
+	public function getAllIndustri_laporan_kecamatan($kecamatan)
+	{	
+		$this->db->select('industri.*,categories.name as kategori');
+		$this->db->like('industri.address',$kecamatan);
 		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
 		$this->db->join('categories','categories.category_id = industricategories.category_id');
 		$query = $this->db->get('industri');
@@ -551,6 +586,19 @@ class Madmin extends CI_Model
 	public function getAccountIndustri()
 	{
 		return $this->db->get_where('industri', array('ID' => $this->session->userdata('ID')) )->row();
+	}
+
+	public function getHitung_pendapatan()
+	{
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		return $this->db->get('industri')->result();
+	}
+
+	public function getHitung_pendapatan_kecamatan($alamat)
+	{
+		$this->db->like('address',$alamat);
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		return $this->db->get('industri')->result();
 	}
 }
 

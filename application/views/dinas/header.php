@@ -11,6 +11,8 @@
 	<link href="<?php echo base_url('public/css/hover-min.css') ?>" rel="stylesheet">
 	<link href="<?php echo base_url('public/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css') ?>" rel="stylesheet">
 	<script type="text/javascript" src="<?php echo base_url('public/js/jquery-3.2.1.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url() ?>public/chartjs/Chart.js"></script>
+
 	<script type="text/javascript" src="<?php echo base_url('public/js/jquery.sticky.min.js') ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js') ?>"></script>
 	<?php if(isset($map['js'])) echo $map['js']; ?>
@@ -52,8 +54,14 @@
 						<a href="<?php echo base_url('Dinas/industri') ?>" class="list-group-item <?php echo active_link_method('industri', 'Dinas') ?>">
 							<i class="fa fa-industry"></i> Data Industri
 						</a>
+						<a href="<?php echo base_url('Dinas/grafik_pendapatan') ?>" class="list-group-item <?php echo active_link_method('grafik_pendapatan', 'Dinas') ?>">
+							<i class="fa fa-industry"></i> Grafik Pendapatan
+						</a>
+						<a href="<?php echo base_url('Dinas/grafik_karyawan') ?>" class="list-group-item <?php echo active_link_method('grafik_karyawan', 'Dinas') ?>">
+							<i class="fa fa-industry"></i> Grafik Karyawan
+						</a>
 						<a href="<?php echo base_url('Dinas/account') ?>" class="list-group-item <?php echo active_link_method('account', 'Dinas') ?>">
-							<i class="fa fa-wrench"></i> Pengaturan Akun
+							<i class="fa fa-wrench"></i> Profil
 						</a>
 					</div>
 				</div>

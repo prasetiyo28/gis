@@ -64,7 +64,7 @@
 							<i class="fa fa-question"></i> Bantuan
 						</a>
 						<a href="<?php echo base_url('admin/account') ?>" class="list-group-item <?php echo active_link_method('account', 'admin') ?>">
-							<i class="fa fa-wrench"></i> Pengaturan Akun
+							<i class="fa fa-wrench"></i> Profil
 						</a>
 					</div>
 				</div>

@@ -16,24 +16,35 @@ class Frontend extends CI_Controller
 
 	}
 
+	public function login()
+	{
+		$this->load->view('login');
+
+	}
+	public function register()
+	{
+		$this->load->view('register');
+
+	}
+
 	public function berita()
 	{
 		$data['artikel'] = $this->Mfrontend->getArtikel();
-		$this->load->view('Frontend/berita',$data);
+		$this->load->view('frontend/berita',$data);
 
 	}
 
 	public function bantuan()
 	{
 		$data['bantuan'] = $this->Mfrontend->getBantuan();
-		$this->load->view('Frontend/bantuan',$data);
+		$this->load->view('frontend/bantuan',$data);
 
 	}
 
 	public function xyzplkghjytrtasetsg_reset($email)
 	{
 		$data['reset'] = $email;
-		$this->load->view('Frontend/reset',$data);
+		$this->load->view('frontend/reset',$data);
 
 	}
 
@@ -56,14 +67,22 @@ class Frontend extends CI_Controller
 		$data['a'] = $this->Mfrontend->getHitung('1');
 		$data['b'] = $this->Mfrontend->getHitung('2');	
 		$data['bantuan'] = $this->Mfrontend->getBantuan();
-		$this->load->view('Frontend/grafik',$data);
+		$this->load->view('frontend/grafik',$data);
 
 	}
+
+	public function grafik_bar()
+	{
+		$data['a'] = $this->Mfrontend->getHitung_pendapatan();
+		$this->load->view('frontend/grafik_bar',$data);
+
+	}
+
 
 	public function detail($id){
 		$data['industri'] = $this->Mfrontend->getIndustri($id);
 		$data['product'] = $this->Mfrontend->getProductIndustri($id);
-		$this->load->view('Frontend/default',$data);	
+		$this->load->view('frontend/default',$data);	
 	}
 
 }

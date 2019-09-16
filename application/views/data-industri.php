@@ -21,6 +21,7 @@ $this->load->view('headerAdmin', $this->data);
    <th class="text-center">Nama</th>
    <th class="text-center">Nama Pemilik</th>
    <th class="text-center">KTP</th>
+   <th class="text-center">SIUP</th>
    <th class="text-center">Telp</th>
    <th class="text-center">Latitude</th>
    <th class="text-center">Longitude</th>
@@ -40,21 +41,28 @@ $this->load->view('headerAdmin', $this->data);
           <a class="verif-industri" href="#" data-id="<?php echo $row->ID; ?>">Verifikasi</a> |
 
         <?php } ?>
-        <a href="<?php echo base_url('admin/updateindustri/'.$row->ID); ?>">Edit</a> |
+        <!-- <a href="<?php echo base_url('admin/updateindustri/'.$row->ID); ?>">Edit</a> | -->
         <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger delete-hotel">Hapus</a> |
         <a href="#" data-id="<?php echo $row->ID ?>" class="text-danger reset-industri">Reset</a>
       </div>	
     </td>
     <td><?php echo $row->owner ?></td>
     <td width="100"><a href="<?php echo base_url() ?>/public/image/<?php echo $row->ktp ?>" target="_blank"><img width="100%" src="<?php echo base_url() ?>/public/image/<?php echo $row->ktp ?>"></a></td>
-    <td><?php echo number_format($row->telp) ?></td>
-    <td><?php echo $row->latitude ?></td>
-    <td><?php echo $row->longitude ?></td>
-    <td width="200"><small><?php echo word_limiter($row->address, 15) ?></small></td>
+    <td width="100">
+      <?php if ($row->siup=='Belum Ada' || $row->siup == ''): ?>
+        Belum Ada
+        <?php else: ?>
+          <a href="<?php echo base_url() ?>/public/image/<?php echo $row->ktp ?>" target="_blank"><img width="100%" src="<?php echo base_url() ?>/public/image/<?php echo $row->siup ?>"></a>
+        <?php endif ?>
+      </td>
+      <td><?php echo number_format($row->telp) ?></td>
+      <td><?php echo $row->latitude ?></td>
+      <td><?php echo $row->longitude ?></td>
+      <td width="200"><small><?php echo word_limiter($row->address, 15) ?></small></td>
 
-    <td width="200"><small><?php echo word_limiter($row->description, 15) ?></small></td>
-  </tr>
-<?php endforeach; ?>
+      <td width="200"><small><?php echo word_limiter($row->description, 15) ?></small></td>
+    </tr>
+  <?php endforeach; ?>
 </tbody>
 </table>
 <?php if(!$industri) : ?>

@@ -144,102 +144,7 @@
 	</div>
 
 
-	<div class="modal fade" id="modalRegister" style="overflow-y:auto;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Register</h4>
-				</div>
-				<form action="<?php echo base_url('user/register') ?>" method="POST" role="form" enctype="multipart/form-data">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="">Nama Industri</label>
-							<input type="text" class="form-control" name="name" required>
-						</div>
-						<div class="form-group">
-							<label for="">Kategori Industri</label>
-							<?php foreach($this->db->get('categories')->result() as $key => $row) : ?>
-							<div class="checkbox checkbox-info checkbox-inline">
-								<input type="checkbox" value="<?php echo $row->category_id; ?>" name="categories[<?php echo $key ?>]">
-								<label> <?php echo $row->name; ?></label>
-							</div>
-						<?php endforeach ?>
-					</div>
-					<div class="form-group">
-						<label for="">Nama Pemilik</label>
-						<input type="text" class="form-control" pattern="[A-Za-z]" name="owner" required>
-					</div>
-
-					<div class="form-group">
-						<label for="">Ktp Pemilik</label>
-						<input type="file" class="form-control" accept="image/*" name="ktp" required>
-					</div>
-
-					<div class="form-group">
-						<label for="">Surat Izin Usaha (*Jika Ada)</label>
-						<input type="file" class="form-control" accept="image/*" name="siup">
-					</div>
-
-					<div class="form-group">
-						<label for="">Email</label>
-						<input type="email" class="form-control" name="email" required>
-					</div>
-
-					<div class="form-group">
-						<label for="">Password :</label>
-						<input type="password" class="form-control" name="password" required>
-					</div>
-
-					<div class="form-group">
-						<label for="">Telp</label>
-						<input type="telp" class="form-control" name="telp" required>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Koordinat :</label>
-						<div class="col-sm-4">
-							<div class="input-group">
-								<input id="input-calendar" type="text" name="latitude" class="form-control"  placeholder="latitude">
-								<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-							</div>
-
-						</div>
-						<div class="col-sm-4">
-							<div class="input-group">
-								<input id="input-calendar" type="text" name="longitude" class="form-control" placeholder="longitude">
-								<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-							</div>
-
-						</div>
-						<div class="col-md-offset-2">
-							<?php echo $peta['html'] ?><br>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="">Alamat</label>
-						<textarea type="text" class="form-control" name="alamat" required></textarea>
-					</div>
-					<div class="form-group">
-						<label for="">Deskripsi</label>
-						<input type="text" class="form-control" name="deskripsi" required>
-					</div>
-					<div class="form-group">
-						<label for="">Foto</label>
-						<input type="file" class="form-control" accept="image/*" name="photo" required>
-					</div>
-
-
-
-				</div>
-
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Register</button>
-				</div>
-			</form>
-		</div>
-	</div>
+	
 </div>
 
 <div class="modal fade" id="modal-alert">
@@ -254,7 +159,6 @@
 	</div>
 </div>
 
-
 <script>
 	function detail_hotel(param) 
 	{
@@ -264,6 +168,9 @@
 		<?php if($this->session->flashdata('message')) : ?>
 			$('div#modal-alert').modal('show');
 		<?php endif; ?>
+
+		
+
 	});
 
 	function setMapToForm(latitude, longitude) 
@@ -273,5 +180,7 @@
 	}
 
 </script>
+
+
 </body>
 </html>

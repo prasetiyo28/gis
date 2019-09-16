@@ -53,19 +53,23 @@ class Welcome extends CI_Controller
 			// $marker['infowindow_content'] .= '<p>Harga : <strong>Rp. '.number_format($value->price).'</strong></p>';
 			$marker['infowindow_content'] .= '<p>'.$value->address.'</p>';
 			$marker['infowindow_content'] .= '<a class="btn btn-info" href='.base_url().'frontend/detail/'.$value->ID.'>Detail</a>';
+			$marker['infowindow_content'] .= '<a class="btn btn-default" href='.base_url().'Welcome/route/'.$value->latitude.",".$value->longitude.'>Route</a>';
 			$marker['infowindow_content'] .= '</div>';
 			$marker['infowindow_content'] .= '</div>';
 			$marker['icon'] = base_url("public/icon/map-marker.png");
 			$this->googlemaps->add_marker($marker);
 		endforeach;
 
+		
+
+
 		$this->googlemaps->initialize($config);
+
 
 		$this->data['map'] = $this->googlemaps->create_map();
 
 		$config['map_div_id'] = "map-add";
 		$config['map_width'] = "400px";
-		$config['center'] = '-6.880029,109.124192';
 		$config['zoom'] = '12';
 		$config['map_height'] = '400px;';
 		$this->googlemaps->initialize($config);
@@ -77,7 +81,64 @@ class Welcome extends CI_Controller
 		$this->googlemaps->add_marker($marker2);
 		$this->data['peta'] = $this->googlemaps->create_map();
 
+
+		
+
 		$this->load->view('main-index', $this->data);
+	}
+
+	public function route($longlat)
+	{
+		$this->data['title'] = "SISTEM INFORMASI GIS";
+		$config['center'] = '-6.880029,109.124192';
+		$config['zoom'] = 'auto';
+		$config['sensor'] = TRUE;
+		$config['styles'] = array(
+			array(
+				"name"=>"No Businesses", 
+				"definition"=> array(
+					array(
+						"featureType"=>"poi", 
+						"stylers"=> array(
+							array(
+								"visibility"=>"off"
+							)
+						)
+					)
+				)
+			)
+		);
+
+		
+
+		$config['directions'] = TRUE;
+
+		// $config['directionsStart'] = '-6.880029,109.124192';
+		$config['directionsStart'] = 'politeknik harapan bersama';
+		$config['directionsEnd'] = $longlat;
+		$config['directionsDivID'] = 'directionsDiv';
+		$this->googlemaps->initialize($config);
+
+
+		$this->data['map'] = $this->googlemaps->create_map();
+
+		$config['map_div_id'] = "map-add";
+		$config['map_width'] = "400px";
+		$config['zoom'] = '12';
+		$config['map_height'] = '400px;';
+		$this->googlemaps->initialize($config);
+
+		$marker2 = array();
+		$marker2['position'] = '-6.880029,109.124192';
+		$marker2['draggable'] = true;
+		$marker2['ondragend'] = 'setMapToForm(event.latLng.lat(), event.latLng.lng());';
+		$this->googlemaps->add_marker($marker2);
+		$this->data['peta'] = $this->googlemaps->create_map();
+
+
+		
+
+		$this->load->view('route', $this->data);
 	}
 
 	public function searchQuery()
@@ -96,6 +157,8 @@ class Welcome extends CI_Controller
 
 		if($this->input->get('q') != '')
 			$this->db->like('industri.name', $this->input->get('q'));
+		$this->db->or_like('industri.address', $this->input->get('q'));
+
 
 		$this->db->where('industri.latitude !=', NULL)
 		->where('industri.longitude !=', NULL);

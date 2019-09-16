@@ -131,12 +131,72 @@ class Dinas extends CI_Controller {
 		// echo json_encode($config);
 	}
 
+	public function grafik_karyawan()
+	{
+		
+		if (!empty($this->input->post('kecamatan'))) {
+			$this->data = array(
+				'title' => "Data Industri",
+				'kecamatan' => $this->input->post('kecamatan'),
+				'a' => $this->madmin->getHitung_pendapatan_kecamatan($this->input->post('kecamatan'))
+			);
+			// echo json_encode($this->data);
+			$this->load->view('dinas/grafik_karyawan', $this->data);			
+		}else{
+
+			$this->data = array(
+				'title' => "Data Industri",
+				'a' => $this->madmin->getHitung_pendapatan()
+			);
+
+			$this->load->view('dinas/grafik_karyawan', $this->data);
+		// echo json_encode($this->data);
+		// echo json_encode($config);	
+		}
+		
+	}
+
+	public function grafik_pendapatan()
+	{
+		
+		
+		
+		if (!empty($this->input->post('kecamatan'))) {
+			$this->data = array(
+				'title' => "Data Industri",
+				'kecamatan' => $this->input->post('kecamatan'),
+				'a' => $this->madmin->getHitung_pendapatan_kecamatan($this->input->post('kecamatan'))
+			);
+			// echo json_encode($this->data);
+			$this->load->view('dinas/grafik_pendapatan', $this->data);			
+		}else{
+
+			$this->data = array(
+				'title' => "Data Industri",
+				'a' => $this->madmin->getHitung_pendapatan()
+			);
+
+			$this->load->view('dinas/grafik_pendapatan', $this->data);
+		// echo json_encode($this->data);
+		// echo json_encode($config);
+		}
+	}
+
 	public function cetak()
 	{
-		$data['dinas'] = $this->madmin->getAccountdinas();
-		$data['industri'] = $this->madmin->getAllIndustri_laporan();
-		$this->load->view('dinas/cetaklaporan',$data);
-		
+		if (!empty($this->input->post('kecamatan'))) {
+			$data['dinas'] = $this->madmin->getAccountdinas();
+			$data['industri'] = $this->madmin->getAllIndustri_laporan_kecamatan($this->input->post('kecamatan'));
+			$this->load->view('dinas/cetaklaporan',$data);
+			
+		}else{
+			$data['dinas'] = $this->madmin->getAccountdinas();
+			$data['industri'] = $this->madmin->getAllIndustri_laporan();
+			$this->load->view('dinas/cetaklaporan',$data);
+
+		}
+
+
 	}
 
 	public function updateproduk($param = 0)
@@ -171,7 +231,7 @@ class Dinas extends CI_Controller {
 		if ($this->form_validation->run() == TRUE) 
 		{
 			$this->madmin->setAccountdinas();
-			
+
 			redirect(current_url());
 		}
 		$this->load->view('dinas/account', $this->data);

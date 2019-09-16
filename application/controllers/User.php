@@ -34,7 +34,7 @@ class User extends CI_Controller
 
 			else {
 				$this->session->set_flashdata('message', 'Kombinasi Username/E-Mail dan Password tidak cocok.');
-				redirect(base_url());
+				redirect('Login');
 			}
 		} else {
 
@@ -78,7 +78,7 @@ class User extends CI_Controller
 				}else{
 
 					$this->session->set_flashdata('message', 'Mohon Masukkan Username/E-Mail dan Password.');
-					redirect(base_url());
+					redirect('Login');
 				}
 			}
 		}

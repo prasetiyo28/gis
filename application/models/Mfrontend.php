@@ -25,9 +25,16 @@ class Mfrontend extends CI_Model
 
 	public function getHitung($param)
 	{
+		$this->db->group_by('industri.ID');
 		$this->db->where('industricategories.category_id',$param);
 		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
 		return $this->db->get('industri')->num_rows();
+	}
+
+	public function getHitung_pendapatan()
+	{
+		$this->db->join('industricategories','industri.ID = industricategories.industri_id');
+		return $this->db->get('industri')->result();
 	}
 
 	public function reset_pass($email,$data)
